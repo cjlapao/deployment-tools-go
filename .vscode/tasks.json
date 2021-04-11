@@ -1,0 +1,40 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        {
+            "type": "npm",
+            "script": "build:docker",
+            "group": "build",
+            "isBackground": true,
+            "presentation": {
+              "echo": true,
+              "reveal": "silent",
+              "focus": false,
+              "panel": "shared",
+              "showReuseMessage": true,
+              "clear": false
+            },
+            "problemMatcher": [],
+            "label": "npm: build:docker",
+            "detail": "docker build --tag cjlapao/deployment-tools:latest .",
+          },
+          {
+            "type": "npm",
+            "script": "publish:docker",
+            "group": "build",
+            "isBackground": true,
+            "presentation": {
+              "echo": true,
+              "reveal": "silent",
+              "focus": false,
+              "panel": "shared",
+              "showReuseMessage": true,
+              "clear": false
+            },
+            "problemMatcher": [],
+            "label": "npm: publish:docker",
+            "detail": "docker push cjlapao/deployment-tools:latest",
+            "dependsOn": ["npm: build:docker"]
+          }
+    ]
+}

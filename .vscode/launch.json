@@ -1,0 +1,54 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/main.go",
+      "env": {
+        "mongoConnectionString": "${input:mongoConnectionString}",
+        "databaseName": "GoRestApiDemo",
+        "DT_DEBUG": "true",
+        "DT_AZURE_SUBSCRIPTION_ID": "${input:azureSubscriptionId}",
+        "SERVICEBUS_CONNECTION_STRING": "${input:azureServiceBusConnectionString}"
+      },
+      "args": [
+        "sandbox",
+        "storage",
+        "list",
+        "--sb-topic=sample.telltime",
+        "--sb-message={\"label\": \"disco\", \"message\": {\"Test\": \"t1\", \"test2\": \"t2\"}, \"properties\": {\"TenantId\":\"11111111-1111-1111-1111-555555550001\"}}",
+        "--kube-context=lke12087-ctx",
+        "--istio-profile=default",
+        "--tenantId=e5208e76-dd12-47f0-9541-c9b45afaffe6",
+        "--clientId=6e4bc37d-77e3-4795-8fd7-997056845376",
+        "--clientSecret=NIMDqtHx_ZlgXj4xyiwsFGssO~T0uXMDmI",
+        "--resourceGroup=carlos-uno",
+        "--storageAccount=carlosunofwdtopology",
+        "--storageContainer=carlos-uno-forwarding-topology",
+        "--blobName=Untitled.fbr",
+        "--downloadBlobTo=.",
+        "--kube-config={apiVersion: v1, clusters: [{cluster: {certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJd01UQXlOVEUxTlRrME4xb1hEVE13TVRBeU16RTFOVGswTjFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTjByCktRdUR0Q2lZaDJqOS9Ma1JMczZxU3p1OEtzZ1FMTFg4dFY2UlJPY1lna0tKbW54WHZZd2tvL0h6VHphZEZkaVoKdEloelRwNEY4WkNBN3N2aVBNMk9PeVA1eFVCVzdCTGNwakVzaUJqNTRxbXVvVHVlZ3dKajVHYWhVT1JKdHN5Ngp5cnE1TVk4SXpsU2xNaXJlR3BYVlRuQWZaUFBNd3BEdUZ3SE9vSFl2TC9saytLcElPSExWS1l5am1meWdWNzFPCjJ1dHFKK212cGNpeHppRkcreVpCdUQ1VFJ4NVI5RUloUk9EOWJURmJsalBPZ3lUbnJVaUh5Z0wvaFo3N1FzQ04KUmlSaWRFNTJUb3NMSFpUbDBHMjI5dXhFNURWdUpuVGl1NFpOcUhBYVdUazF5MnMzc3RSUGNmVkJwR3NJc1VXZQp1RUR2L1hVRE1vbk5oakJNK1gwQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFGaUhHWEdtSDMyVmdnazYyZDBWYm1KV3dwWTQKY3k2cXZROVBtV2N5TWpJVzU1dEhrVG1lcy9UdmtDM1J2SW5WYy9rNmdYcGRBeWs2YUhqZ1dkRVVMV2pQUlZNTQpjTlpYeFR4WUg0THpNZVBuZDJLME43QThjSWFuUzNkdm9Jb1Y0eDF3Y0lub1ZBQVM2WUZFd3ppS3FZcFdnSEpGCnpvWDNlNE1scEw3SXA5dXUxdE1xa0xTL3hZcVlpSzhWU1NEcUR2WjVhVmxxemxtdkIvYVcwRG41cDc1ZVdmM1gKNk1IeGRzMXQ4WXFKNXI5cmV4ckpmY1ZsMUl0MVFYRFBXWVFKR0diQjRLaFRyV2owV09hZUZ2Wnl5dFZRcXJ0VgpSS29NdmhRSDBYNkpVRlB5NXAzWFlDM3NFa2NzUWVMWHNqZlpSV0l4SnlRb0Z3bUI3V3B0N21idWtCOD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=, server: 'https://a66d793a-2ddc-4d6e-bc8c-a9c885e34ee0.eu-west-1.linodelke.net:443'}, name: lke12087}, {cluster: {certificate-authority: 'C:\\Users\\cjlap\\.minikube\\ca.crt', server: 'https://172.28.68.251:8443'}, name: minikube}], contexts: [{context: {cluster: lke12087, namespace: default, user: lke12087-admin}, name: lke12087-ctx}, {context: {cluster: minikube, namespace: default, user: minikube}, name: minikube}], current-context: lke12087-ctx, kind: Config, preferences: {}, users: [{name: lke12087-admin, user: {token: eyJhbGciOiJSUzI1NiIsImtpZCI6IkZPakx4S05LR05sQ1dxeE1ITEREdVpIbmhLVnc5WWdabko3bUpoM2h1NWMifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJsa2UtYWRtaW4tdG9rZW4tdjY4d3MiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibGtlLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZGUxODdmMzctOGZjMC00ZmNkLTg3YTgtZDkzYTE0ODY4MTk4Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmxrZS1hZG1pbiJ9.Kigt5uuFgTwEJ4wutIU8LC0Q-tOuGXQg1hS0AHuiFhgmRAZ_1-sARLhBxD-mj06d_bZaQK8uWabe8IibKETrgGYyhaQSTA65P6dRgwZk6FOelb95EjU38D5zAnu_ux-29wlLqAZPNBVMTpL5aq76Zkb2aUmYbDG0NcsfXantfCFq6TwEgShxIbQRKzyHy7mDL1GGN-DKwc-3lszTjqmGQB9NwSJvig_IIZEOtBAAI-Pcd3LrQ_YV52G9Wcki2jL1D9I14Wy-MJOUII8z5uKjSCntTaqGlM_ao9qkIc4QLX84tt6RyhlBvGFpnngO6ZsvL6Qzs9-jpWo7UF9bNixQ9A}}, {name: minikube, user: {client-certificate: 'C:\\Users\\cjlap\\.minikube\\profiles\\minikube\\client.crt', client-key: 'C:\\Users\\cjlap\\.minikube\\profiles\\minikube\\client.key'}}]}"
+      ],
+    }
+  ],
+  "inputs": [
+    {
+      "id": "mongoConnectionString",
+      "type": "promptString",
+      "description": "MongoDB Connection String"
+    },
+    {
+      "id": "azureSubscriptionId",
+      "type": "promptString",
+      "description": "Azure Subscription Id"
+    },
+    {
+      "id": "azureServiceBusConnectionString",
+      "type": "promptString",
+      "description": "Azure Service Bus Connection String"
+    }
+  ]
+}
