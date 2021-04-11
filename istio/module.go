@@ -72,7 +72,7 @@ func Processor() {
 
 		kubeerr := kubeModule.AddKubeConfig(ctx.Kubernetes.KubeConfig)
 		if kubeerr != nil {
-			logger.LogError(kubeerr)
+			logger.Error(kubeerr)
 		}
 	default:
 		istioModuleCommandHelper()

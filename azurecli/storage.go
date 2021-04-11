@@ -42,7 +42,7 @@ func getStorageAccountClient() (*storage.AccountsClient, error) {
 	storageAccountsClient := storage.NewAccountsClient(ctx.SubscriptionID)
 	authorizeToken, err := GetClientAuthorizer()
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return nil, err
 	}
 	storageAccountsClient.Authorizer = authorizeToken
@@ -60,7 +60,7 @@ func getStorageAccountKeys() error {
 
 	if ctx.Storage.AccountName == "" {
 		err := errors.New("The Azure context is missing the account name")
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 
@@ -69,7 +69,7 @@ func getStorageAccountKeys() error {
 	cli, err := getStorageAccountClient()
 	result, err := cli.ListKeys(localCtx, ctx.ResourceGroup, ctx.Storage.AccountName)
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 
@@ -92,7 +92,7 @@ func getServiceURL() (*azblob.ServiceURL, error) {
 
 	err := getStorageAccountKeys()
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return nil, err
 	}
 
@@ -104,7 +104,7 @@ func getServiceURL() (*azblob.ServiceURL, error) {
 
 	credentials, err := azblob.NewSharedKeyCredential(ctx.Storage.AccountName, ctx.Storage.PrimaryAccountKey)
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return nil, err
 	}
 
@@ -180,7 +180,7 @@ func ListFilesInContainer(next string) ([]azblob.BlobItemInternal, error) {
 	items := make([]azblob.BlobItemInternal, 0)
 	containerURL, err := getContainerURL()
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return nil, err
 	}
 
@@ -195,7 +195,7 @@ func ListFilesInContainer(next string) ([]azblob.BlobItemInternal, error) {
 		})
 
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return nil, err
 	}
 
@@ -223,13 +223,13 @@ func UploadBlob() error {
 	logger.Debug("Starting upload of blob file %v", ctx.Storage.FileName)
 	if ctx.Storage.FileName == "" || !helper.FileExists(ctx.Storage.FileName) {
 		err := fmt.Errorf("File %v does not exist or was not defined", ctx.Storage.FileName)
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 
 	containerURL, err := getContainerURL()
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 
@@ -245,7 +245,7 @@ func UploadBlob() error {
 	blobURL := containerURL.NewBlockBlobURL(ctx.Storage.FileName)
 	_, err = blobURL.Upload(localCtx, reader, azblob.BlobHTTPHeaders{ContentType: "application/octet-stream"}, azblob.Metadata{}, azblob.BlobAccessConditions{}, azblob.DefaultAccessTier, nil, azblob.ClientProvidedKeyOptions{})
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 	logger.Success("Finished uploading file %v to container %v in account %v", ctx.Storage.FileName, ctx.Storage.ContainerName, ctx.Storage.AccountName)
@@ -257,13 +257,13 @@ func DownloadBlob() error {
 	logger.Debug("Starting download of blob file %v", ctx.Storage.FileName)
 	if ctx.Storage.FileName == "" {
 		err := fmt.Errorf("File %v does not exist or was not defined", ctx.Storage.FileName)
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 
 	containerURL, err := getContainerURL()
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 
@@ -274,7 +274,7 @@ func DownloadBlob() error {
 	blobURL := containerURL.NewBlockBlobURL(ctx.Storage.FileName)
 	get, err := blobURL.Download(localCtx, 0, 0, azblob.BlobAccessConditions{}, false, azblob.ClientProvidedKeyOptions{})
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 

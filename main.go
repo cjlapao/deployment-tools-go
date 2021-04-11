@@ -91,12 +91,12 @@ func sandboxModule() {
 		case "create-container":
 			err := azurecli.CreateContainer()
 			if err != nil {
-				logger.LogError(err)
+				logger.Error(err)
 			}
 		case "delete-container":
 			err := azurecli.DeleteContainer()
 			if err != nil {
-				logger.LogError(err)
+				logger.Error(err)
 			}
 		}
 	}

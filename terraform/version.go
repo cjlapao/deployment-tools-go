@@ -95,7 +95,7 @@ func Download(version string) (string, error) {
 	logger.Debug("Downloading file into %v", downloadPath)
 	err := helper.DownloadFile(url, downloadPath)
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return "", err
 	}
 

@@ -174,7 +174,7 @@ func (m *Module) GetKubeConfig() *KubeConfig {
 
 		kubeConfig, err := parseKubeConfig(out)
 		if err != nil {
-			logger.LogError(err)
+			logger.Error(err)
 		}
 
 		m.KubeConfig = kubeConfig
@@ -182,7 +182,7 @@ func (m *Module) GetKubeConfig() *KubeConfig {
 
 		kubeconfigBytes, err := yaml.Marshal(kubeConfig)
 		if err != nil {
-			logger.LogError(err)
+			logger.Error(err)
 		}
 
 		helper.WriteToFile(string(kubeconfigBytes), common.KubeConfig())
@@ -201,7 +201,7 @@ func (m *Module) AddKubeConfig(kubeConfig string) error {
 	logger.Notice("Adding kube config to Kubectl")
 	config, err := parseKubeConfig(kubeConfig)
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 
@@ -267,7 +267,7 @@ func (m *Module) AddCluster(cluster ClusterElement) error {
 	logger.Debug(out)
 
 	if cmdErr != nil {
-		logger.LogError(cmdErr)
+		logger.Error(cmdErr)
 		return cmdErr
 	}
 
@@ -291,7 +291,7 @@ func (m *Module) AddCredentials(user UserElement) error {
 	logger.Debug(out)
 
 	if cmdErr != nil {
-		logger.LogError(cmdErr)
+		logger.Error(cmdErr)
 		return cmdErr
 	}
 
@@ -305,7 +305,7 @@ func (m *Module) AddContext(context ContextElement) error {
 	logger.Debug(out)
 
 	if cmdErr != nil {
-		logger.LogError(cmdErr)
+		logger.Error(cmdErr)
 		return cmdErr
 	}
 
@@ -324,7 +324,7 @@ func (m *Module) SetContext(contextName string) error {
 	logger.Debug(out)
 
 	if cmdErr != nil {
-		logger.LogError(cmdErr)
+		logger.Error(cmdErr)
 		return cmdErr
 	}
 
@@ -446,7 +446,7 @@ func downloadModule(version string) (string, error) {
 	logger.Debug("Downloading file into", downloadPath)
 	err := helper.DownloadFile(url, downloadPath)
 
-	logger.LogError(err)
+	logger.Error(err)
 	return filename, err
 }
 
@@ -466,7 +466,7 @@ func parseKubeConfig(value string) (KubeConfig, error) {
 
 	yamlErr := yaml.Unmarshal([]byte(value), &kubeConfig)
 	if yamlErr != nil {
-		logger.LogError(yamlErr)
+		logger.Error(yamlErr)
 		return KubeConfig{}, yamlErr
 	}
 

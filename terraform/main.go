@@ -50,7 +50,7 @@ func (m *Module) ImportTest(filePath string, format ImportFormat, variables ...f
 		logger.Info("Found file %v, reading content", filePath)
 		content, err := helper.ReadFromFile(filePath)
 		if err != nil {
-			logger.LogError(err)
+			logger.Error(err)
 			return
 		}
 		if len(variables) > 0 {
@@ -59,7 +59,7 @@ func (m *Module) ImportTest(filePath string, format ImportFormat, variables ...f
 
 		imp, err := m.ReadImportContent(content, format)
 		if err != nil {
-			logger.LogError(err)
+			logger.Error(err)
 		}
 
 		logger.Debug("ID: %v", imp.Azure.SubscriptionID)

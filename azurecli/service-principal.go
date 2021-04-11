@@ -18,7 +18,7 @@ func Login() *entities.AzureLogin {
 		out, err := commands.Execute("az", "login", "--service-principal", "-u", ctx.ClientID, "-p", ctx.ClientSecret, "-t", ctx.TenantID)
 
 		if err != nil {
-			logger.LogError(err)
+			logger.Error(err)
 			return nil
 		}
 
@@ -57,7 +57,7 @@ func Logoff() {
 		out, err := commands.Execute("az", "logout")
 
 		if err != nil {
-			logger.LogError(err)
+			logger.Error(err)
 		}
 
 		os.Unsetenv("DEVTOOLS_LOGGED")

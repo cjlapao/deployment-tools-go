@@ -102,7 +102,7 @@ func (m *DeploymentToolsModule) SetExists(version string) bool {
 		if helper.FileExists(m.Exec) {
 			version, err := m.GetLocalVersion(m.Exec)
 			m.Version = version
-			logger.LogError(err)
+			logger.Error(err)
 			if err == nil {
 				logger.Success("Found %v Module version %v", m.Name, m.Version)
 				m.Exists = true
@@ -186,7 +186,7 @@ func (m *DeploymentToolsModule) UninstallAll() error {
 		for _, cVer := range cachedVersions {
 			err := os.RemoveAll(helper.JoinPath(toolsFolder, cVer.Path))
 			if err != nil {
-				logger.LogError(err)
+				logger.Error(err)
 				return err
 			}
 		}
@@ -223,7 +223,7 @@ func (m *DeploymentToolsModule) UninstallVersion(version string) error {
 		}
 		err := os.RemoveAll(versionFound.Path)
 		if err != nil {
-			logger.LogError(err)
+			logger.Error(err)
 			return err
 		}
 		if m.PostUninstall != nil {
@@ -291,7 +291,7 @@ func (m *DeploymentToolsModule) InstallVersion(version string) error {
 							logger.Debug("Extracting %v to the tools folder", m.Name)
 							_, err := helper.Unzip(helper.JoinPath(helper.GetExecutionPath(), filename), toolsFolder+"/"+moduleName+"-"+version)
 							if err != nil {
-								logger.LogError(err)
+								logger.Error(err)
 							}
 							os.Remove(helper.JoinPath(helper.GetExecutionPath(), filename))
 							m.ModulePath = helper.JoinPath(toolsFolder, moduleName+"-"+version)
@@ -302,7 +302,7 @@ func (m *DeploymentToolsModule) InstallVersion(version string) error {
 							_, err := helper.Unzip(helper.JoinPath(helper.GetExecutionPath(), filename), toolsFolder+"/"+moduleName+"-"+version)
 
 							if err != nil {
-								logger.LogError(err)
+								logger.Error(err)
 							}
 
 							os.Remove(helper.JoinPath(helper.GetExecutionPath(), filename))

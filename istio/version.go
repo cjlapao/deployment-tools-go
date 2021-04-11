@@ -119,7 +119,7 @@ func Download(version string) (string, error) {
 	err := helper.DownloadFile(url, downloadPath)
 
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return "", err
 	}
 
@@ -136,13 +136,13 @@ func PostInstall(version string) error {
 	logger.Debug("Starting to move Istio from %v to %v", istioDownloadDir, baseDir)
 	err := helper.CopyDir(istioDownloadDir, baseDir)
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 	logger.Debug("Finished moving Istio to %v", baseDir)
 	err = os.RemoveAll(istioDownloadDir)
 	if err != nil {
-		logger.LogError(err)
+		logger.Error(err)
 		return err
 	}
 	logger.Debug("Finished removing Istio %v directory", istioDownloadDir)

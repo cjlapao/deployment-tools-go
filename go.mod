@@ -1,6 +1,6 @@
 module github.com/cjlapao/deployment-tools-go
 
-go 1.15
+go 1.16
 
 require (
 	github.com/cjlapao/common-go v0.0.7
